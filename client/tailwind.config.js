@@ -8,6 +8,10 @@ export default {
         montserrat: ["Montserrat", "sans-serif"],
         roboto: ["Roboto", "sans-serif"],
       },
+      colors: {
+        primary: "#1aac83",
+        secondary: "#e7195a",
+      },
     },
   },
   plugins: [],
