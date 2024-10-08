@@ -27,7 +27,10 @@ export const productsReducer = (state: State, action: Action): State => {
       }
     case "CREATE_PRODUCT":
       return {
-        products: [action.payload, ...(state.products || [])],
+        products:
+          state.products === null
+            ? [action.payload]
+            : [action.payload, ...state.products],
       }
     case "DELETE_PRODUCT":
       return {

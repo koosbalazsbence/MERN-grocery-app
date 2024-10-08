@@ -3,7 +3,8 @@ const mongoose = require("mongoose")
 
 // get all products
 const getProducts = async (req, res) => {
-  const products = await Product.find({}).sort({ _id: -1 })
+  const products = await Product.find({}).sort({ createdAt: -1 })
+
   res.status(200).json(products)
 }
 
@@ -22,8 +23,31 @@ const getProduct = async (req, res) => {
 
 // create new product
 const createProduct = async (req, res) => {
-  const { title, price, description, image, category, rating, numReviews } =
-    req.body
+  const { title, price, description, image, category } = req.body
+
+  let emptyFields = []
+
+  if (!title) {
+    emptyFields.push("title")
+  }
+  if (!price) {
+    emptyFields.push("price")
+  }
+  if (!description) {
+    emptyFields.push("description")
+  }
+  if (!image) {
+    emptyFields.push("image")
+  }
+  if (!category) {
+    emptyFields.push("category")
+  }
+  if (emptyFields.length > 0) {
+    return res
+      .status(400)
+      .json({ error: "Please fill in all the fields", emptyFields })
+  }
+
   try {
     const product = await Product.create({
       title,
@@ -31,14 +55,8 @@ const createProduct = async (req, res) => {
       description,
       image,
       category,
-      rating,
-      numReviews,
     })
-    if (product.title) {
-      res.status(200).json(product)
-    } else {
-      res.status(400).json({ error: "Product with this title already exists" })
-    }
+    res.status(201).json(product)
   } catch (error) {
     res.status(400).json({ error: error.message })
   }

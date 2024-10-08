@@ -34,7 +34,7 @@ const Home = () => {
       <div className="w-4/5 mx-auto mt-12">
         <CreateProductButton />
       </div>
-      <div className="w-4/6 mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+      <div className="w-3/5 mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 ">
         {products &&
           products.map((product) => (
             <ProductDetails key={product._id} product={product} />

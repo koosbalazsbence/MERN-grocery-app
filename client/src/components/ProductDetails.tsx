@@ -34,13 +34,17 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({ product }) => {
     }
   }
   return (
-    <div className="bg-gray-50 border-2 mx-auto m-5 relative shadow-lg rounded rounded-tl-xl rounded-tr-xl">
-      <img
-        src={product.image}
-        alt={product.title}
-        className="rounded-tl-xl rounded-tr-xl shadow-lg"
-        draggable="false"
-      />
+    <div className="bg-gray-50 border-2 mx-auto m-5 relative shadow-lg rounded rounded-tl-xl rounded-tr-xl w-3/4 max-h-full">
+      <div className="rounded-tl-xl rounded-tr-xl shadow-lg w-full h-40 object-contain">
+        <img
+          src={product.image}
+          alt={product.title}
+          className="w-full h-full object-contain rounded-tl-xl rounded-tr-xl p-3"
+          draggable="false"
+          loading="lazy"
+          decoding="async"
+        />
+      </div>
       <div className="p-5">
         <h4 className="mb-2 text-2xl font-poppins text-primary">
           {product.title}
@@ -48,18 +52,18 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({ product }) => {
         <p className="text-xl">${product.price}</p>
         <p>{product.description}</p>
         <p className="text-gray-400">{product.category}</p>
-        <p className="absolute top-0 right-0 mt-2 mr-5 text-gray-400">
+        <p className="absolute bottom-5 right-5 text-gray-400">
           {formatDistanceToNow(new Date(product.createdAt), {
             addSuffix: true,
           })}
         </p>
+        <p
+          className="absolute top-5 right-5 cursor-pointer bg-slate-200 p-2 rounded-full"
+          onClick={handleClick}
+        >
+          <Trash2 size={18} />
+        </p>
       </div>
-      <span
-        className="absolute top-5 right-5 cursor-pointer bg-slate-200 p-2 rounded-full hover:scale-110 transition duration-500 ease-in-out"
-        onClick={handleClick}
-      >
-        <Trash2 size={18} />
-      </span>
     </div>
   )
 }
