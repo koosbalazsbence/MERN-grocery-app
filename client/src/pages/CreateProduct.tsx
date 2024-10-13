@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { useProductsContext } from "../hooks/useProductsContext"
 import { useNavigate } from "react-router-dom" // Add useNavigate for redirecting
+// import { Image } from "lucide-react"
 
 const CreateProduct = () => {
   const { dispatch } = useProductsContext()
@@ -109,7 +110,7 @@ const CreateProduct = () => {
           />
 
           {/* Image URL */}
-          <label className="block font-montserrat">Image URL:</label>
+          <label className="block font-montserrat">Image:</label>
           <input
             className={
               emptyFields.includes("image")
